@@ -1,4 +1,4 @@
-package com.example.androidflowexample
+package com.example.androidflowexample.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.example.androidflowexample.R
 import com.example.androidflowexample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
