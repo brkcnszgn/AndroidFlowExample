@@ -10,7 +10,7 @@ ext.versions = [
         okHttpVersion : "4.9.0",
         coroutineVersion : "1.4.2",
         materialVersion : "1.4.0",
-        navigationVersion : "2.3.5",
+        navigationVersion : "2.4.2",
         lifecylcleExtVersion : "1.1.1",
         fragmetVersion : "1.4.0",
         activityVersion : "1.4.0",

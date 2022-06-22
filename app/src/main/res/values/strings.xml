@@ -1,4 +1,9 @@
 <resources>
+    <string name="no_internet_connection">no_internet_connection</string>
+    <string name="unexpected_error">unexpected_error</string>
+    <string name="socket_exception">socket_exception</string>
+    <string name="io_exception">io_exception</string>
+    <string name="auth_exception">Error while logging in\nPlease login again!</string>
     <string name="app_name">AndroidFlowExample</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
