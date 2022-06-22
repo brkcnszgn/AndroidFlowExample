@@ -45,5 +45,11 @@ fun Context.extGetColor(@ColorRes colorId: Int): Int {
     return ContextCompat.getColor(this, colorId)
 }
 
+/**
+ * use it with when, to add all remaining branches
+ */
+val <T> T.exhaustive: T
+    get() = this
+
 
 

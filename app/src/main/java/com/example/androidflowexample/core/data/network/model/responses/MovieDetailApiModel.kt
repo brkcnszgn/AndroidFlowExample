@@ -3,7 +3,7 @@ package com.example.androidflowexample.core.data.network.model.responses
 import com.example.androidflowexample.core.data.network.model.common.*
 import com.google.gson.annotations.SerializedName
 
-data class MovieDetailResponse(
+data class MovieDetailApiModel(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")

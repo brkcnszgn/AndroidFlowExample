@@ -1,21 +1,17 @@
 package com.example.androidflowexample.core.base
 
-import com.example.androidflowexample.core.utils.DispatcherProvider
-import com.example.androidflowexample.core.utils.NetworkHelper
-import com.example.androidflowexample.core.utils.NetworkResource
-import com.example.androidflowexample.core.utils.ResourceProvider
+import com.example.androidflowexample.core.data.di.DispatcherProvider
+import com.example.androidflowexample.core.utils.*
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import retrofit2.Response
-import java.io.IOException
-import java.net.SocketTimeoutException
+import java.lang.UnknownError
 
 abstract class BaseRepository constructor(
     private val networkHelper: NetworkHelper,
-    private val resourceProvider: ResourceProvider,
     private val dispatcher: DispatcherProvider
 ) {
-    suspend fun <T> safeApiCall(
+    private suspend fun <T> safeApiCall(
         apiCall: suspend () -> T
     ): NetworkResource<T> {
         return withContext(dispatcher.io) {
@@ -24,27 +20,31 @@ abstract class BaseRepository constructor(
                     val result = apiCall.invoke()
                     when ((result as Response<*>).code()) {
                         in 200..300 -> NetworkResource.Success(result)
-                        401 -> NetworkResource.Error(resourceProvider.getString(Str.auth_exception))
-                        else -> NetworkResource.Error(result.message())
+                        401 -> NetworkResource.Error(AuthError())
+                        else -> NetworkResource.Error(UnknownError())
                     }
                 } catch (throwable: Throwable) {
-                    ProgressBar.newInstance().hide()
-                    when (throwable) {
-                        is HttpException -> NetworkResource.Error(throwable.message())
-                        is SocketTimeoutException -> NetworkResource.Error(
-                            resourceProvider.getString(
-                                Str.socket_exception
-                            )
-                        )
-                        is IOException -> NetworkResource.Error(resourceProvider.getString(Str.io_exception))
-                        else -> NetworkResource.Error(resourceProvider.getString(Str.unexpected_error))
-                    }
+                    NetworkResource.Error(throwable)
                 }
-
             } else {
-                ProgressBar.newInstance().hide()
-                NetworkResource.Error(resourceProvider.getString(Str.no_internet_connection))
+                NetworkResource.Error(InternetConnectionError())
             }
         }
+    }
+
+    fun <T> baseRequestFlow(
+        apiCall: suspend () -> Response<T>
+    ) = flow {
+        emit(Resource.Loading)
+        val networkResponse = safeApiCall {
+            apiCall.invoke()
+        }
+        val response = when (networkResponse) {
+            is NetworkResource.Success -> Resource.Success(networkResponse.data?.body())
+            is NetworkResource.Error -> {
+                Resource.Failure(networkResponse.throwable)
+            }
+        }
+        emit(response)
     }
 }

@@ -7,7 +7,7 @@ ext.versions = [
         lifecycleViewModelVersion : "2.4.0",
         lifecycleLiveDataVersion : "2.4.0",
         gsonVersion : "2.9.0",
-        okHttpVersion : "4.9.0",
+        okHttpVersion : "4.9.3",
         coroutineVersion : "1.4.2",
         materialVersion : "1.4.0",
         navigationVersion : "2.4.2",
@@ -29,7 +29,8 @@ ext.versions = [
         viewPagerVersion : "1.0.0",
         swipeRefreshVersion : "1.1.0",
         shimmerVersion : "0.5.0",
-        leakCanaryVersion : "2.8"
+        leakCanaryVersion : "2.8",
+        chuckVersion : "1.1.0"
 
 
 ]

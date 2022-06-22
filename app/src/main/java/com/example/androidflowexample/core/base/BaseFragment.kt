@@ -1,33 +1,50 @@
 package com.example.androidflowexample.core.base
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
+import com.example.androidflowexample.core.utils.AuthError
+import com.example.androidflowexample.core.utils.InternetConnectionError
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-
-abstract class BaseFragment<VB : ViewBinding, AC : Activity>(
+abstract class BaseFragment<VB : ViewBinding, ViewModel : BaseViewModel>(
     private val inflateFragmentView: InflateFragmentView<VB>
 ) : Fragment() {
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 
+    private var loadingDialog: LoadingDialog? = null
 
-    protected val mActivity: AC
-        get() = activity as AC
+    abstract val viewModel: ViewModel
 
-    fun showProgress() {
-        ProgressBar.newInstance().show(childFragmentManager)
+    protected open fun hideLoadingDialog() {
+        loadingDialog?.dismissAllowingStateLoss()
+        loadingDialog = null
     }
 
-    fun hideProgress() {
-        ProgressBar.newInstance().hide()
+    protected open fun showLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog(
+                args = LoadingDialog.LoadingModel(
+                    "Yükleniyor...",
+                    ""
+                )
+            )
+        }
+        val isAlreadyAdded = childFragmentManager.findFragmentByTag(LoadingDialog.TAG)
+        if (isAlreadyAdded == null) {
+            loadingDialog?.showNow(childFragmentManager, LoadingDialog.TAG)
+        }
     }
 
-    abstract fun init()
+    abstract fun initView()
     abstract fun logicProcess()
     abstract fun clickListener()
     override fun onCreateView(
@@ -41,9 +58,51 @@ abstract class BaseFragment<VB : ViewBinding, AC : Activity>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        initView()
         logicProcess()
         clickListener()
+        collectNetworkError()
+        collectShowLoading()
+    }
+
+    private fun collectNetworkError() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.networkError.collect { error ->
+                        when (error) {
+                            is AuthError -> {
+
+                            }
+                            is UnknownError -> {
+
+                            }
+                            is InternetConnectionError -> {
+
+                            }
+                            else -> {
+
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    private fun collectShowLoading() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.showLoading.collect { show->
+                if (show) {
+                    showLoadingDialog()
+                } else {
+                    hideLoadingDialog()
+                }
+            }
+        }
     }
 
     override fun onDestroy() {

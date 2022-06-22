@@ -1,9 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.AndroidFlowExample" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.ImdbApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="Theme.AndroidFlowExample" parent="Base.Theme.AndroidFlowExample" />
+
+    <style name="SplashScreenTheme" parent="Base.Theme.AndroidFlowExample">
+        <item name="android:windowBackground">@drawable/ic_logo</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
+    <style name="TextColorStyle" parent="Theme.ImdbApp">
+        <item name="android:textColor">@color/blackTitle</item>
+    </style>
 </resources>

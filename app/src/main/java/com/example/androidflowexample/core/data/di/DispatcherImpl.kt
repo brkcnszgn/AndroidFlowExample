@@ -1,5 +1,6 @@
-package com.example.androidflowexample.core.utils
+package com.example.androidflowexample.core.data.di
 
+import com.example.androidflowexample.core.data.di.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject

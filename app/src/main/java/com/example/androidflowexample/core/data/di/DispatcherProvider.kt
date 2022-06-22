@@ -1,7 +1,6 @@
-package com.example.androidflowexample.core.utils
+package com.example.androidflowexample.core.data.di
 
 import kotlinx.coroutines.CoroutineDispatcher
-
 
 interface DispatcherProvider {
     val main: CoroutineDispatcher

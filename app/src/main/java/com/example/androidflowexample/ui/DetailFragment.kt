@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.androidflowexample.R
-import com.example.androidflowexample.databinding.FragmentFirstBinding
+import com.example.androidflowexample.databinding.FragmentSecondBinding
 
+/**
+ * A simple [Fragment] subclass as the second destination in the navigation.
+ */
+class DetailFragment : Fragment() {
 
-class FirstFragment : Fragment() {
+    private var _binding: FragmentSecondBinding? = null
 
-    private var _binding: FragmentFirstBinding? = null
-
+    // This property is only valid between onCreateView and
+    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,7 +25,7 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -29,8 +33,8 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        binding.buttonSecond.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
 

@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
@@ -92,8 +93,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutineVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutineVersion"
 
-    //Material design
-    implementation "com.google.android.material:material:$versions.materialVersion"
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigationVersion"

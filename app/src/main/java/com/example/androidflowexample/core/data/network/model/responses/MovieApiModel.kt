@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.example.androidflowexample.core.data.network.model.common.Dates
 import com.example.androidflowexample.core.data.network.model.common.MovieOverview
 
-data class MovieListResponse(
+data class MovieApiModel(
     @SerializedName("dates")
     val dates: Dates,
     @SerializedName("page")
