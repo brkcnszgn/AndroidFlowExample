@@ -107,7 +107,5 @@ dependencies {
     //shimmer effect
     implementation "com.facebook.shimmer:shimmer:$versions.shimmerVersion"
 
-    //Leak canary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$versions.leakCanaryVersion"
 
 }

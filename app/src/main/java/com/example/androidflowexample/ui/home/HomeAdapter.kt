@@ -39,7 +39,10 @@ class HomeAdapter(
 
         fun bind(model: MovieOverview) {
             with(binding){
-                imgCover.loadFromUrl("${HomeConstants.IMAGE_BASE_URL}${model.posterPath}", R.drawable.bg_rounded)
+                imageView.loadFromUrl("${HomeConstants.IMAGE_BASE_URL}${model.posterPath}", R.drawable.holder)
+                textView.text = model.title
+                textView2.text = model.overview
+                textView3.text = model.releaseDate
             }
 
         }
@@ -77,7 +80,5 @@ fun ImageView.loadFromUrl(
     if (shouldCircleCrop) {
         requestBuilder.circleCrop()
     }
-
-
-    requestBuilder.into(this@loadFromUrl as ImageView)
+    requestBuilder.into(this@loadFromUrl)
 }

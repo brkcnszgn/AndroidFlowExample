@@ -4,4 +4,17 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+    <style name="TextViewBoldStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">#fff</item>
+        <item name="singleLine">true</item>
+        <item name="android:textSize">@dimen/dimen_12sp</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextViewNormalStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/dimen_10sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

@@ -6,7 +6,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.example.androidflowexample.R
 import com.example.androidflowexample.core.base.BaseFragment
+import com.example.androidflowexample.core.base.Drw
+import com.example.androidflowexample.core.base.setDivider
 import com.example.androidflowexample.databinding.FragmentFirstBinding
 import com.example.androidflowexample.ui.home.model.HomeUiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,9 +23,10 @@ class HomeFragment :
 
     override val viewModel: HomeViewModel by viewModels()
 
-    private val adapter by lazy {
+    private val homeAdapter by lazy {
         HomeAdapter { item ->
             //no*op
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 
@@ -34,7 +39,10 @@ class HomeFragment :
 
     override fun initView() {
         with(binding) {
-            recyclerView.adapter = adapter
+            recyclerView.apply {
+                adapter = homeAdapter
+                setDivider(Drw.divider)
+            }
         }
     }
 
@@ -56,10 +64,10 @@ class HomeFragment :
                                 //show error
                             }
                             is HomeUiState.RefreshList -> {
-                                adapter.submitList(state.refreshMovieList)
+                                homeAdapter.submitList(state.refreshMovieList)
                             }
                             is HomeUiState.Success -> {
-                                adapter.submitList(state.movieList)
+                                homeAdapter.submitList(state.movieList)
                             }
                         }
 

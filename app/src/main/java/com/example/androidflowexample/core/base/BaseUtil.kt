@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.example.androidflowexample.R
 
 typealias InflateActivityView<T> = (LayoutInflater) -> T
@@ -51,5 +53,19 @@ fun Context.extGetColor(@ColorRes colorId: Int): Int {
 val <T> T.exhaustive: T
     get() = this
 
+fun RecyclerView.setDivider(@DrawableRes drawableRes: Int) {
+    val divider = DividerItemDecoration(
+        this.context,
+        DividerItemDecoration.VERTICAL
+    )
+    val drawable = ContextCompat.getDrawable(
+        this.context,
+        drawableRes
+    )
+    drawable?.let {
+        divider.setDrawable(it)
+        addItemDecoration(divider)
+    }
+}
 
 

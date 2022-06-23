@@ -3,62 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+    android:paddingVertical="@dimen/dimen_16"
+    android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgCover"
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
+        app:layout_constraintWidth_percent="0.27"
+        app:layout_constraintHeight_percent="1"
+        android:src="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
-        android:ellipsize="marquee"
-        android:maxLines="2"
-        android:padding="4dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideTitle"
-        tools:text="MOONRISE KINGDOM (2012)" />
-
-    <TextView
-        android:id="@+id/txtDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:ellipsize="marquee"
-        android:maxLines="2"
-        android:padding="4dp"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtTitle"
-        tools:text="MOONRISE KINGDOM (2012)" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideTitle"
+        style="@style/TextViewBoldStyle"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        android:layout_marginStart="@dimen/dimen_16"
+        android:layout_marginTop="@dimen/dimen_8"
+        tools:text="TextView"
+        android:padding="@dimen/dimen_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        style="@style/TextViewNormalStyle"
+        android:id="@+id/textView2"
+        android:padding="@dimen/dimen_4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_8"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:singleLine="false"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:text="asdasdasdasdasdasdasdasdasdsdsdsdsdsdsdsdsdsdsdsdsasdasdaasdasdasdasdasdasdsdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdaasdasdasdasd" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/TextViewNormalStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.363"
+        tools:text="TextView" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/dimen_4"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_right" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
